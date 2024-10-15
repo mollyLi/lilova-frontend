@@ -47,67 +47,67 @@ export const createProductAction = async (
     // redirect('/');
   };
 
-  export const fetchRentals = async () => {
-    const user = await getAuthUser();
-    const rentals = await db.property.findMany({
-      where: {
-        profileId: user.id,
-      },
-      select: {
-        id: true,
-        name: true,
-        price: true,
-      },
-    });
+  // export const fetchRentals = async () => {
+  //   const user = await getAuthUser();
+  //   const rentals = await db.property.findMany({
+  //     where: {
+  //       profileId: user.id,
+  //     },
+  //     select: {
+  //       id: true,
+  //       name: true,
+  //       price: true,
+  //     },
+  //   });
   
-    const rentalsWithBookingSums = await Promise.all(
-      rentals.map(async (rental) => {
-        const totalNightsSum = await db.booking.aggregate({
-          where: {
-            propertyId: rental.id,
-            paymentStatus: true,
-          },
-          _sum: {
-            totalNights: true,
-          },
-        });
+  //   const rentalsWithBookingSums = await Promise.all(
+  //     rentals.map(async (rental) => {
+  //       const totalNightsSum = await db.booking.aggregate({
+  //         where: {
+  //           propertyId: rental.id,
+  //           paymentStatus: true,
+  //         },
+  //         _sum: {
+  //           totalNights: true,
+  //         },
+  //       });
   
-        const orderTotalSum = await db.booking.aggregate({
-          where: {
-            propertyId: rental.id,
-            paymentStatus: true,
-          },
-          _sum: {
-            orderTotal: true,
-          },
-        });
+  //       const orderTotalSum = await db.booking.aggregate({
+  //         where: {
+  //           propertyId: rental.id,
+  //           paymentStatus: true,
+  //         },
+  //         _sum: {
+  //           orderTotal: true,
+  //         },
+  //       });
   
-        return {
-          ...rental,
-          totalNightsSum: totalNightsSum._sum.totalNights,
-          orderTotalSum: orderTotalSum._sum.orderTotal,
-        };
-      })
-    );
+  //       return {
+  //         ...rental,
+  //         totalNightsSum: totalNightsSum._sum.totalNights,
+  //         orderTotalSum: orderTotalSum._sum.orderTotal,
+  //       };
+  //     })
+  //   );
   
-    return rentalsWithBookingSums;
-  };
+  //   return rentalsWithBookingSums;
+  // };
   
-  export async function deleteRentalAction(prevState: { propertyId: string }) {
-    const { propertyId } = prevState;
-    const user = await getAuthUser();
+  // export async function deleteRentalAction(prevState: { propertyId: string }) {
+  //   const { propertyId } = prevState;
+  //   const user = await getAuthUser();
   
-    try {
-      await db.property.delete({
-        where: {
-          id: propertyId,
-          profileId: user.id,
-        },
-      });
+  //   try {
+  //     await db.property.delete({
+  //       where: {
+  //         id: propertyId,
+  //         profileId: user.id,
+  //       },
+  //     });
   
-      revalidatePath('/rentals');
-      return { message: 'Rental deleted successfully' };
-    } catch (error) {
-      return renderError(error);
-    }
-  }
+  //     revalidatePath('/rentals');
+  //     return { message: 'Rental deleted successfully' };
+  //   } catch (error) {
+  //     return renderError(error);
+  //   }
+  // }

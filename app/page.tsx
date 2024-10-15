@@ -1,10 +1,15 @@
-import React from 'react';
+import Link from "next/link"
+import { Button, buttonVariants } from '@/components/ui/button';
 
 const HomePage = () => {
   return (
-    <h1 className='text-3xl'>
+    <div className='text-3xl'>
       Welcome to HomePage!
-    </h1>
+      <Button variant='outline' size='lg' className='capitalize m-8'>Click me</Button>
+      <Button asChild>
+        <Link href="https://ui.shadcn.com/">Shadcn/ui</Link>
+      </Button>
+    </div>
   );
 };
 

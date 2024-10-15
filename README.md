@@ -45,3 +45,58 @@ Clerk is a user authentication and management platform that provides a set of to
 
 [Clerk Docs](https://clerk.com/)
 [Clerk + Next.js Setup](https://clerk.com/docs/quickstarts/nextjs)
+
+### Supabase
+
+Supabase is an open source Firebase alternative with a Postgres database, Authentication, instant APIs, Edge Functions, Realtime subscriptions, Storage, and Vector embeddings.
+
+[Supabase Doc](https://supabase.com/docs/guides/getting-started)
+
+### Prisma
+
+- install prisma vs-code extension
+
+Prisma ORM is a database toolkit that simplifies database access in web applications. It allows developers to interact with databases using a type-safe and auto-generated API, making database operations easier and more secure.
+
+- Prisma server: A standalone infrastructure component sitting on top of your database.
+- Prisma client: An auto-generated library that connects to the Prisma server and lets you read, write and stream data in your database. It is used for data access in your applications.
+
+```sh
+npm install prisma --save-dev
+npm install @prisma/client
+```
+
+```sh
+npx prisma init
+```
+
+### Connect Supabase with Prisma
+
+[Useful Info](https://supabase.com/partners/integrations/prisma)
+
+- add to .env
+
+```bash
+DATABASE_URL=""
+DIRECT_URL=""
+```
+
+- DATABASE_URL : Transaction + Password + "?pgbouncer=true&connection_limit=1"
+- DIRECT_URL : Session + Password
+
+
+- npx prisma migrate dev --name init
+- npx prisma db push
+
+npx prisma migrate dev --name init creates a new migration for your database schema
+changes and applies it, while npx prisma db push directly updates the database schema without creating a migration. In the context of databases, a migration is set of operations, that modify the database schema, helping it evolve over time while preserving existing data.
+
+```bash
+npx prisma db push
+```
+
+[Prisma Studio](https://www.prisma.io/docs/orm/tools/prisma-studio) is a visual editor for the data in your database. 
+
+```bash
+npx prisma studio
+```

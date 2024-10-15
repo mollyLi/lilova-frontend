@@ -5,9 +5,11 @@ const HomePage = () => {
   return (
     <div className='text-3xl'>
       Welcome to HomePage!
-      <Button variant='outline' size='lg' className='capitalize m-8'>Click me</Button>
+      <Button asChild className='capitalize m-8'>
+        <Link href="/products">商品列表頁</Link>
+      </Button>
       <Button asChild>
-        <Link href="https://ui.shadcn.com/">Shadcn/ui</Link>
+        <Link href="/products/create">上架新商品</Link>
       </Button>
     </div>
   );

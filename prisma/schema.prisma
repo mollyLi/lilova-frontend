@@ -14,7 +14,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Property {
+model Product {
   id          String     @id @default(uuid())
   name        String
   brand       String
@@ -24,7 +24,6 @@ model Property {
   description String
   price       Int
   size        String
-  seller      String
   gender      String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt

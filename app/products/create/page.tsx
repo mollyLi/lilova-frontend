@@ -12,11 +12,11 @@ function CreateProductPage() {
     <section>
       <div className='border p-8 rounded'>
         <h2 className='text-2xl font-semibold mb-8 capitalize'>
-            新增商品
+            上架商品
         </h2>
         <FormContainer action={createProductAction}>
             <FormInput
-                name='title'
+                name='name'
                 type='text'
                 label='商品名稱'
                 defaultValue=''

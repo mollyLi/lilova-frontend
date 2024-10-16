@@ -17,14 +17,14 @@ generator client {
 model Product {
   id          String     @id @default(uuid())
   name        String
-  brand       String
-  condition   String
-  category    String
-  image       String
+  brand       String?
+  condition   String?
+  category    String?
+  image       String?
   description String
   price       Int
-  size        String
-  gender      String
+  size        String?
+  gender      String?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }

@@ -5,7 +5,7 @@ function ImageInput() {
   const name = 'image';
   return (
     <div className='mb-2'>
-      <Label htmlFor={name} className='capitalize'>
+      <Label htmlFor={name}>
         商品圖片
       </Label>
       <Input

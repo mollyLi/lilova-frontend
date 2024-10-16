@@ -1,17 +1,15 @@
 'use server';
 
-// import {
-//   imageSchema,
-//   profileSchema,
-//   propertySchema,
-//   validateWithZodSchema,
-//   createReviewSchema,
-// } from './schemas';
+import {
+  imageSchema,
+  productSchema,
+  validateWithZodSchema,
+} from './schemas';
 import db from './db';
 // import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
 // import { revalidatePath } from 'next/cache';
-// import { redirect } from 'next/navigation';
-// import { uploadImage } from './supabase';
+import { redirect } from 'next/navigation';
+import { uploadImage } from './supabase';
 // import { calculateTotals } from './calculateTotals';
 // import { formatDate } from './format';
 
@@ -28,23 +26,29 @@ export const createProductAction = async (
   ): Promise<{ message: string }> => {
     try {
       const rawData = Object.fromEntries(formData);
-    //   const file = formData.get('image') as File;
+      const file = formData.get('image') as File;
       console.log(rawData);
   
-    //   const validatedFields = validateWithZodSchema(propertySchema, rawData);
-    //   const validatedFile = validateWithZodSchema(imageSchema, { image: file });
-    //   const fullPath = await uploadImage(validatedFile.image);
-      return { message: 'product created.' }
-    //   await db.property.create({
-    //     data: {
-    //       ...validatedFields,
-    //       image: fullPath,
-    //     },
-    //   });
+      const validatedFields = validateWithZodSchema(productSchema, rawData);
+      const validatedFile = validateWithZodSchema(imageSchema, { image: file });
+      const fullPath = await uploadImage(validatedFile.image);
+
+      await db.product.create({
+        data: {
+          brand: '',
+          condition: '',
+          category: '',
+          // image: '',
+          size: '',
+          gender: '',
+          ...validatedFields,
+          image: fullPath,
+        },
+      });
     } catch (error) {
       return renderError(error);
     }
-  // redirect('/');
+  redirect('/');
   };
 
   export const fetchProducts = async () => {

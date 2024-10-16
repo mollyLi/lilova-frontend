@@ -39,6 +39,52 @@ Shadcn/ui is a component library for React, built using Tailwind CSS for styling
   - ui
   - navbar
 
+### Zod
+
+Zod is a JavaScript library for building schemas and validating data, providing type safety and error handling.
+
+```sh
+npm install zod
+```
+
+- create utils/schemas.ts
+
+```ts
+import * as z from 'zod';
+import { ZodSchema } from 'zod';
+
+export const profileSchema = z.object({
+  // firstName: z.string().max(5, { message: 'max length is 5' }),
+  firstName: z.string(),
+  lastName: z.string(),
+  username: z.string(),
+});
+```
+
+- create utils/actions.ts
+- import in profile/create page.tsx
+
+```ts
+'use server';
+
+import { profileSchema } from './schemas';
+
+export const createProfileAction = async (
+  prevState: any,
+  formData: FormData
+) => {
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = profileSchema.parse(rawData);
+    console.log(validatedFields);
+    return { message: 'Profile Created' };
+  } catch (error) {
+    console.log(error);
+    return { message: 'there was an error...' };
+  }
+};
+```
+
 ### Clerk
 
 Clerk is a user authentication and management platform that provides a set of tools and services to handle user authentication in web and mobile applications.
@@ -93,6 +139,12 @@ changes and applies it, while npx prisma db push directly updates the database s
 
 ```bash
 npx prisma db push
+```
+
+If you are not looking to create a new migration and only want to generate new Prisma Client code after updating the schema, you can simply run:
+
+```bash
+npx prisma generate
 ```
 
 [Prisma Studio](https://www.prisma.io/docs/orm/tools/prisma-studio) is a visual editor for the data in your database. 

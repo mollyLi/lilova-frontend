@@ -12,11 +12,10 @@ export const formatDate = (date: Date, onlyMonth?: boolean) => {
 
 export const formatCurrency = (amount: number | null) => {
   const value = amount || 0;
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('zh-TW', {
     style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    currency: 'TWD',
+    minimumFractionDigits: 0
   }).format(value);
 };
 

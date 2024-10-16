@@ -3,11 +3,11 @@ export type actionFunction = (
   formData: FormData
 ) => Promise<{ message: string }>;
 
-export type PropertyCardProps = {
+export type ProductCardProps = {
   image: string;
   id: string;
   name: string;
-  tagline: string;
-  country: string;
+  brand: string;
+  size: string;
   price: number;
 };

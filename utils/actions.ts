@@ -7,7 +7,7 @@
 //   validateWithZodSchema,
 //   createReviewSchema,
 // } from './schemas';
-// import db from './db';
+import db from './db';
 // import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
 // import { revalidatePath } from 'next/cache';
 // import { redirect } from 'next/navigation';
@@ -44,54 +44,31 @@ export const createProductAction = async (
     } catch (error) {
       return renderError(error);
     }
-    // redirect('/');
+  // redirect('/');
   };
 
-  // export const fetchRentals = async () => {
-  //   const user = await getAuthUser();
-  //   const rentals = await db.property.findMany({
-  //     where: {
-  //       profileId: user.id,
-  //     },
-  //     select: {
-  //       id: true,
-  //       name: true,
-  //       price: true,
-  //     },
-  //   });
+  export const fetchProducts = async () => {
+    // const user = await getAuthUser();
+    const products = await db.product.findMany({
+      select: {
+        id: true,
+        brand: true,
+        condition: true,
+        category: true,
+        image: true,
+        name: true,
+        price: true,
+        description: true,
+        size: true,
+        gender: true,
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
   
-  //   const rentalsWithBookingSums = await Promise.all(
-  //     rentals.map(async (rental) => {
-  //       const totalNightsSum = await db.booking.aggregate({
-  //         where: {
-  //           propertyId: rental.id,
-  //           paymentStatus: true,
-  //         },
-  //         _sum: {
-  //           totalNights: true,
-  //         },
-  //       });
-  
-  //       const orderTotalSum = await db.booking.aggregate({
-  //         where: {
-  //           propertyId: rental.id,
-  //           paymentStatus: true,
-  //         },
-  //         _sum: {
-  //           orderTotal: true,
-  //         },
-  //       });
-  
-  //       return {
-  //         ...rental,
-  //         totalNightsSum: totalNightsSum._sum.totalNights,
-  //         orderTotalSum: orderTotalSum._sum.orderTotal,
-  //       };
-  //     })
-  //   );
-  
-  //   return rentalsWithBookingSums;
-  // };
+    return products;
+  };
   
   // export async function deleteRentalAction(prevState: { propertyId: string }) {
   //   const { propertyId } = prevState;

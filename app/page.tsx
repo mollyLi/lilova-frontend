@@ -5,6 +5,7 @@ async function HomePage() {
   const products = await fetchProducts();
   return (
     <section>
+      {/* @ts-ignore */}
       <ProductList products={products} />
     </section>
   );

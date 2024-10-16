@@ -6,9 +6,9 @@ import { formatCurrency } from '@/utils/format';
 function ProductCard({ product }: { product: ProductCardProps }) {
   const { name, brand, image, price, size, id: productId } = product;
   return (
-    <article className=''>
+    <article className='mb-2 rounded bg-gray-50 p-4'>
       <Link href={`/item/${productId}`}>
-        <div className='relative h-[300px] mb-2 overflow-hidden rounded-md'>
+        <div className='relative h-[230px] mb-2 overflow-hidden rounded-md'>
           <Image
             src={image}
             fill

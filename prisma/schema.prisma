@@ -20,7 +20,7 @@ model Product {
   brand       String?
   condition   String?
   category    String?
-  image       String?
+  image       String
   description String
   price       Int
   size        String?

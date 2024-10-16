@@ -4,10 +4,14 @@ export type actionFunction = (
 ) => Promise<{ message: string }>;
 
 export type ProductCardProps = {
-  image: string;
   id: string;
   name: string;
   brand?: string;
+  condition?: string;
+  category?: string;
+  image: string;
+  description: string;
+  price: number | null;
   size?: string;
-  price: number;
+  gender?: number;
 };

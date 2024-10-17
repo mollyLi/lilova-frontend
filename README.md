@@ -130,12 +130,14 @@ DIRECT_URL=""
 - DATABASE_URL : Transaction + Password + "?pgbouncer=true&connection_limit=1"
 - DIRECT_URL : Session + Password
 
+For production-ready database schema that you want to track over time.
+This migration file is stored in `prisma/migration`s directory and is versioned (each migration has a unique timestamp and name).
 
-- npx prisma migrate dev --name init
-- npx prisma db push
+```bash
+npx prisma migrate dev --name init
+```
 
-npx prisma migrate dev --name init creates a new migration for your database schema
-changes and applies it, while npx prisma db push directly updates the database schema without creating a migration. In the context of databases, a migration is set of operations, that modify the database schema, helping it evolve over time while preserving existing data.
+For prototyping, testing, or quick changes during the early stages of development where you don’t need to track schema changes.
 
 ```bash
 npx prisma db push

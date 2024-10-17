@@ -10,12 +10,13 @@ import { Button } from '../ui/button';
 import UserIcon from './UserIcon';
 import { links } from '@/utils/links';
 import SignOutLink from './SignOutLink';
-import { SignedOut, SignedIn, SignInButton, SignUpButton } from '@clerk/nextjs';
+import { SignedOut, SignedIn, SignInButton } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 function LinksDropdown() {
   const { userId } = auth();
-  const isAdminUser = userId === process.env.ADMIN_USER_ID;
-  console.log(userId, process.env.ADMIN_USER_ID)
+  const { ADMIN_USER_ID, ADMIN_USER_ID2 } = process.env
+  const isAdminUser = userId === ADMIN_USER_ID || auth().userId === ADMIN_USER_ID2;
+  console.log('userId', userId)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

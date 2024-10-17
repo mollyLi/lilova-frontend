@@ -35,14 +35,13 @@ export const createProductAction = async (
 
       await db.product.create({
         data: {
-          brand: '',
-          condition: '',
-          category: '',
-          // image: '',
-          size: '',
-          gender: '',
           ...validatedFields,
+          brand: '',
+          category: '',
+          condition: '',
+          gender: '',
           image: fullPath,
+          size: '',
         },
       });
     } catch (error) {
@@ -56,15 +55,15 @@ export const createProductAction = async (
     const products = await db.product.findMany({
       select: {
         id: true,
-        brand: true,
-        condition: true,
-        category: true,
-        image: true,
-        name: true,
-        price: true,
-        description: true,
-        size: true,
-        gender: true,
+        // brand: true,
+        // condition: true,
+        // category: true,
+        // image: true,
+        // name: true,
+        // price: true,
+        // description: true,
+        // size: true,
+        // gender: true,
       },
       orderBy: {
         createdAt: 'desc'

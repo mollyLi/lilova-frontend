@@ -6,6 +6,10 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.banner-bg {
+  background-color: #f5f3f0;
+}
+
 @layer components {
   .container {
     @apply mx-auto max-w-3xl xl:max-w-5xl px-8;

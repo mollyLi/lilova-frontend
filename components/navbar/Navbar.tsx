@@ -3,12 +3,7 @@ import LinksDropdown from './LinksDropdown';
 
 function Navbar() {
   return (
-    <section className='border-b'>
-      <div className='py-8'>
-        <Link href='/'>
-          <h1 className="text-4xl font-bold text-center">LiLova</h1>
-        </Link>
-        </div>
+    <section className=''>
         <nav className='text-stone-400 text-lg py-2 flex gap-4 items-center'>
           <Link href='/'>全部商品 All</Link>
           <Link href='/'>品牌瀏覽 Brands</Link>

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs';
 import Navbar from "@/components/navbar/Navbar";
+import ImageContainer from '../components/home/ImageContainer';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <ImageContainer mainImage='/images/logo.jpg' name='Banner 品牌形象圖' />
           <div className="container sm:w-full mx-auto">
             <Navbar />
             {children}

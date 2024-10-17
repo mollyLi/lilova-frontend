@@ -14,17 +14,44 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Product {
-  id          String     @id @default(uuid())
+model Brand {
+  id          String     @id @default(cuid())
+  description String?
+  logo        String?
   name        String
-  brand       String?
-  condition   String?
-  category    String?
-  image       String
-  description String
-  price       Int
-  size        String?
-  gender      String?
+  products    Product[]
+  website     String?
+}
+
+model Profile {
+  id           String     @id @default(uuid())
+  clerkId      String     @unique
+  firstName    String
+  lastName     String
+  username     String
+  email        String
+  profileImage String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  products Product[]
+}
+
+model Product {
+  id          String     @id @default(cuid())
+  brand       Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brandId     String
+  category    String
+  condition   String
   createdAt   DateTime   @default(now())
+  description String
+  gender      String
+  image       String
+  name        String
+  origPrice   Int
+  price       Int
+  profile     Profile    @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId   String
+  size        String
+  source      String
   updatedAt   DateTime   @updatedAt
 }

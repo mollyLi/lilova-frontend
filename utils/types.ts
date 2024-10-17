@@ -5,13 +5,13 @@ export type actionFunction = (
 
 export type ProductCardProps = {
   id: string;
-  name: string;
   brand?: string;
-  condition?: string;
   category?: string;
-  image: string;
+  condition?: string;
   description: string;
+  gender?: number;
+  image: string;
+  name: string;
   price: number | null;
   size?: string;
-  gender?: number;
 };

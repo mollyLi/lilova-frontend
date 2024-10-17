@@ -8,7 +8,7 @@ function Navbar() {
           <h1 className='text-xl font-bold text-stone-800'>Nuan Nuan</h1>
           <div className='flex gap-4'>
             <Link href='/'>全部商品</Link>
-            <Link href='/'>品牌瀏覽</Link>
+            <Link href='/brands'>品牌瀏覽</Link>
           </div>
           <LinksDropdown />
         </nav>

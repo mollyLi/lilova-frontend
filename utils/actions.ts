@@ -50,6 +50,19 @@ export const createProductAction = async (
   redirect('/');
   };
 
+  export const fetchBrands = async () => {
+    const brands = await db.brand.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+      // orderBy: {
+      //   name: 'asc'
+      // }
+    })
+    return brands;
+  }
+
   export const fetchProducts = async () => {
     // const user = await getAuthUser();
     const products = await db.product.findMany({

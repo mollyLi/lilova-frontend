@@ -32,9 +32,12 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <ImageContainer mainImage='/images/logo.jpg' name='Banner 品牌形象圖' />
           <div className="container sm:w-full mx-auto">
             <Navbar />
+          </div>
+          <ImageContainer mainImage='/images/logo.jpg' name='Banner 品牌形象圖' />
+          <div className="container sm:w-full mx-auto">
+            
             {children}
           </div>
         </body>

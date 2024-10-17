@@ -5,7 +5,6 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { LuAlignLeft } from 'react-icons/lu';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import UserIcon from './UserIcon';
@@ -20,8 +19,7 @@ function LinksDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline' className='flex gap-4 max-w-[100px]'>
-          <LuAlignLeft className='w-6 h-6' />
+        <Button variant='outline' className='flex gap-4 max-w-[100px] border-0 shadow-none'>
           <UserIcon />
         </Button>
       </DropdownMenuTrigger>

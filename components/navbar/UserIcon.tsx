@@ -1,5 +1,5 @@
-import { LuUser2 } from 'react-icons/lu';
+import { RxAvatar } from "react-icons/rx";
 async function UserIcon() {
-  return <LuUser2 className='w-6 h-6 bg-primary rounded-full text-white' />;
+  return <RxAvatar className='w-6 h-6 rounded-full text-gray-400' />;
 }
 export default UserIcon;

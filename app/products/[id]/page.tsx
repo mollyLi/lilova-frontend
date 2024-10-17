@@ -8,7 +8,7 @@ async function  ProductDetailsPage({ params } : { params: {id: string }}) {
         <section>
             <h2>image box</h2>
             <p>{product.name}</p>
-            <p>品牌 {product.brand}</p>
+            <p>品牌 {product.brandId}</p>
             <p>尺寸 {product.size}</p>
             <p>衣況 {product.condition}</p>
             <p>說明 {product.description}</p>

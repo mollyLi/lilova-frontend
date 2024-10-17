@@ -37,7 +37,7 @@ model Profile {
 }
 
 model Product {
-  id          String     @id @default(cuid())
+  id          String     @id @default(uuid())
   brand       Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
   brandId     String
   category    String

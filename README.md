@@ -92,6 +92,17 @@ Clerk is a user authentication and management platform that provides a set of to
 [Clerk Docs](https://clerk.com/)
 [Clerk + Next.js Setup](https://clerk.com/docs/quickstarts/nextjs)
 
+### Direct User
+
+ After a user signs up, Clerk will handle the redirection. If there’s no specific redirect set up during the sign-up process, Clerk will fall back to the URL provided in this environment variable (`/profile/create`).
+
+.env.local
+
+```bash
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/profile/create
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/profile/create
+```
+
 ### Supabase
 
 Supabase is an open source Firebase alternative with a Postgres database, Authentication, instant APIs, Edge Functions, Realtime subscriptions, Storage, and Vector embeddings.

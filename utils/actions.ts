@@ -2,11 +2,12 @@
 
 import {
   imageSchema,
+  profileSchema,
   productSchema,
   validateWithZodSchema,
 } from './schemas';
 import db from './db';
-// import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
+import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
 // import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { uploadImage } from './supabase';
@@ -18,6 +19,36 @@ const renderError = (error: unknown): { message: string } => {
   return {
     message: error instanceof Error ? error.message : 'An error occurred',
   };
+};
+
+export const createProfileAction = async (
+  prevState: any,
+  formData: FormData
+) => {
+  try {
+    const user = await currentUser();
+    if (!user) throw new Error('Please login to create a profile');
+
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = validateWithZodSchema(profileSchema, rawData);
+
+    await db.profile.create({
+      data: {
+        clerkId: user.id,
+        email: user.emailAddresses[0].emailAddress,
+        profileImage: user.imageUrl ?? '',
+        ...validatedFields,
+      },
+    });
+    await clerkClient.users.updateUserMetadata(user.id, {
+      privateMetadata: {
+        hasProfile: true,
+      },
+    });
+  } catch (error) {
+    return renderError(error);
+  }
+  redirect('/');
 };
 
 export const createProductAction = async (
@@ -36,12 +67,15 @@ export const createProductAction = async (
       await db.product.create({
         data: {
           ...validatedFields,
-          brand: '',
+          brandId: 'cm2cy8i2f00010cmg5ri61yso',
           category: '',
           condition: '',
           gender: '',
           image: fullPath,
           size: '',
+          origPrice: 4000,
+          profileId: 'user_2nVvtoFOmFm3w8sPtbYFePjl5ZI',
+          source: ''
         },
       });
     } catch (error) {
@@ -69,14 +103,15 @@ export const createProductAction = async (
       select: {
         id: true,
         // brand: true,
-        // condition: true,
-        // category: true,
-        // image: true,
-        // name: true,
-        // price: true,
-        // description: true,
-        // size: true,
-        // gender: true,
+        condition: true,
+        category: true,
+        image: true,
+        name: true,
+        origPrice: true,
+        price: true,
+        description: true,
+        size: true,
+        gender: true,
       },
       orderBy: {
         createdAt: 'desc'

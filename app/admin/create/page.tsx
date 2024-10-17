@@ -3,11 +3,13 @@ import FormContainer from '@/components/form/FormContainer';
 import { createProductAction } from '@/utils/actions';
 import { SubmitButton } from '@/components/form/Buttons';
 import PriceInput from '@/components/form/PriceInput';
-// import CategoriesInput from '@/components/form/CategoriesInput';
+import BrandsInput from '@/components/form/BrandsInput';
 import TextAreaInput from '@/components/form/TextAreaInput';
 import ImageInput from '@/components/form/ImageInput';
+import { fetchBrands } from '@/utils/actions';
 
-function CreateProductPage() {
+async function CreateProductPage() {
+  const brands = await fetchBrands();
   return (
     <section>
       <div className='border p-8 rounded'>
@@ -23,7 +25,7 @@ function CreateProductPage() {
             />
             <ImageInput />
             <PriceInput />
-            {/* <CategoriesInput /> */}
+            <BrandsInput brands={brands} />
             <TextAreaInput
                 name='description'
                 labelText='商品資訊'

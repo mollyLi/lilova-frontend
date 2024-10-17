@@ -6,21 +6,23 @@ import { formatCurrency } from '@/utils/format';
 function ProductCard({ product }: { product: ProductCardProps }) {
   const { name, brand, image, price, size, id: productId } = product;
   return (
-    <article className='mb-2 rounded bg-gray-50 p-4'>
+    <article className='mb-2 rounded-lg bg-gray-50'>
       <Link href={`/products/${productId}`}>
-        <div className='relative h-[230px] mb-2 overflow-hidden rounded-md'>
+        <div className='relative h-[230px] mb-2 overflow-hidden'>
           <Image
             src={image}
             fill
             sizes='(max-width:768px) 100vw, 50vw'
             alt={name}
-            className='rounded-md object-cover transform group-hover:scale-110 transition-transform duration-500'
+            className='rounded-t-lg object-cover transform group-hover:scale-110 transition-transform duration-500'
           />
         </div>
-        <h3 className=''>{name}</h3>
-        <p className='text-gray-500 text-sm'>{brand}</p>
-        <p className='text-sm'>Size: {size}</p>
-        <p className='font-semibold'>{formatCurrency(price)}</p>
+        <div className='p-2'>
+          <h3 className='text-sm'>{name}</h3>
+          <p className='text-gray-500 text-sm'>{brand}</p>
+          <p className='text-sm'>尺寸: {size}</p>
+          <p className='font-semibold'>{formatCurrency(price)}</p>
+        </div>
       </Link>
     </article>
   );

@@ -7,7 +7,7 @@ function ProductCard({ product }: { product: ProductCardProps }) {
   const { name, brand, image, price, size, id: productId } = product;
   return (
     <article className='mb-2 rounded bg-gray-50 p-4'>
-      <Link href={`/item/${productId}`}>
+      <Link href={`/products/${productId}`}>
         <div className='relative h-[230px] mb-2 overflow-hidden rounded-md'>
           <Image
             src={image}

@@ -73,6 +73,14 @@ export const createProductAction = async (
   
     return products;
   };
+
+  export const fetchProductDetails = (id: string) => {
+    return db.product.findUnique({
+      where: {
+        id,
+      },
+    });
+  };
   
   // export async function deleteRentalAction(prevState: { propertyId: string }) {
   //   const { propertyId } = prevState;

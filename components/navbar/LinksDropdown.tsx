@@ -15,8 +15,8 @@ import { auth } from '@clerk/nextjs/server';
 function LinksDropdown() {
   const { userId } = auth();
   const { ADMIN_USER_ID, ADMIN_USER_ID2 } = process.env
-  const isAdminUser = userId === ADMIN_USER_ID || auth().userId === ADMIN_USER_ID2;
-  console.log('userId', userId)
+  const isAdminUser = userId === ADMIN_USER_ID || userId === ADMIN_USER_ID2;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -4,6 +4,9 @@ import { createProductAction } from '@/utils/actions';
 import { SubmitButton } from '@/components/form/Buttons';
 import PriceInput from '@/components/form/PriceInput';
 import BrandsInput from '@/components/form/BrandsInput';
+import SizeInput from '@/components/form/SizeInput';
+import ConditionInput from '@/components/form/ConditionInput';
+import GenderInput from '@/components/form/GenderInput';
 import TextAreaInput from '@/components/form/TextAreaInput';
 import ImageInput from '@/components/form/ImageInput';
 import { fetchBrands } from '@/utils/actions';
@@ -24,11 +27,15 @@ async function CreateProductPage() {
                 defaultValue=''
             />
             <ImageInput />
+            <PriceInput label='品牌賣價' name='origPrice' />
             <PriceInput />
             <BrandsInput brands={brands} />
+            <SizeInput />
+            <ConditionInput />
+            <GenderInput />
             <TextAreaInput
                 name='description'
-                labelText='商品資訊'
+                labelText='說明'
             />
             <SubmitButton text='送出' className='mt-12' />
         </FormContainer>

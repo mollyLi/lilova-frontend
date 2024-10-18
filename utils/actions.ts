@@ -78,11 +78,7 @@ export const createProductAction = async (
         data: {
           ...validatedFields,
           category: '',
-          condition: '',
-          gender: '',
           image: fullPath,
-          size: '',
-          origPrice: 4000,
           profileId: user.id,
           source: '',
         },
@@ -106,34 +102,15 @@ export const createProductAction = async (
     return brands;
   }
 
-  export const fetchBrandById = async ({ brandId } : { brandId: string }) => {
-    const brand = await db.brand.findUnique({
-      select: {
-        id: true,
-        name: true,
-      },
-      where: {
-        id: brandId
-      }
-    })
-    return brand;
-  }
-
   export const fetchProducts = async () => {
-    // const user = await getAuthUser();
     const products = await db.product.findMany({
       select: {
         id: true,
-        // brand: true,
-        condition: true,
-        category: true,
         image: true,
         name: true,
         origPrice: true,
         price: true,
-        description: true,
         size: true,
-        gender: true,
       },
       orderBy: {
         createdAt: 'desc'
@@ -164,6 +141,10 @@ export const createProductAction = async (
       where: {
         id,
       },
+      include: {
+        brand: true,
+        profile: true,
+      }
     });
   };
   

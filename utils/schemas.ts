@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { ZodSchema } from 'zod';
+import { gender } from './gender';
 
 export function validateWithZodSchema<T>(
   schema: ZodSchema<T>,
@@ -56,6 +57,12 @@ export const productSchema = z.object({
       message: 'name must be less than 100 characters.',
     }),
   brandId: z.string(),
+  condition: z.string(),
+  size: z.string(),
+  gender: z.string(),
+  origPrice: z.coerce.number().int().min(0, {
+    message: 'price must be a positive number.',
+  }),
   price: z.coerce.number().int().min(0, {
     message: 'price must be a positive number.',
   }),

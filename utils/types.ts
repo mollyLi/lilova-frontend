@@ -10,15 +10,15 @@ export type ProfileProps = {
 
 export type ProductCardProps = {
   id: string;
-  brand?: string;
-  category?: string;
-  condition?: string;
+  brand: string;
+  category: string;
+  condition: string;
   description: string;
-  gender?: number;
+  gender: string;
   image: string;
   name: string;
   price: number | null;
-  size?: string;
+  size: string;
   source: string;
   profile: ProfileProps;
 };
@@ -30,3 +30,14 @@ export type BrandProps = {
   name: string;
   website?: string;
 }
+
+export type SizeProps = {
+  label: string;
+  name: string;
+}
+
+export type ConditionProps = {
+  code: string;
+  label: string;
+}
+

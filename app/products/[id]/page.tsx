@@ -3,7 +3,8 @@ import { fetchProductDetails } from '@/utils/actions';
 import { redirect } from 'next/navigation';
 import { formatCurrency } from '@/utils/format';
 import { findGenderByCode } from '@/utils/gender';
-import { findByCode } from '@/utils/conditions';
+import { findConditionByCode } from '@/utils/conditions';
+import { findSizeByCode } from '@/utils/sizes';
 
 async function  ProductDetailsPage({ params } : { params: {id: string }}) {
     const product = await fetchProductDetails(params.id);
@@ -25,8 +26,8 @@ async function  ProductDetailsPage({ params } : { params: {id: string }}) {
                 <p className='text-xs text-gray-600 line-through'>{formatCurrency(product.origPrice)} 品牌賣價</p>
             </div>
             <p className='text-blue-600'>品牌 {product.brand.name}</p>
-            <p>尺寸 {product.size}</p>
-            <p>衣況 {findByCode(product.condition)?.label}</p>
+            <p>尺寸 {findSizeByCode(product.size)?.label}</p>
+            <p>衣況 {findConditionByCode(product.condition)?.label}</p>
             <p>說明 {product.description}</p>
             <p>購入來源 </p>
             <p className='text-sm font-semibold'>類別 </p>

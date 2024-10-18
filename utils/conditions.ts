@@ -23,7 +23,7 @@ export const conditions: ConditionProps[] = [
     },
 ];
 
-export const findByCode = (code: string) => {
+export const findConditionByCode = (code: string) => {
     return conditions.find((item) => item.code === code);
 };
   

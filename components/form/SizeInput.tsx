@@ -28,7 +28,7 @@ function SizeInput({ defaultValue }  : { defaultValue?: string }) {
         <SelectContent>
           {sizes.map((item) => {
             return (
-              <SelectItem key={item.name} value={item.name}>
+              <SelectItem key={item.code} value={item.code}>
                 {item.label}
               </SelectItem>
             );

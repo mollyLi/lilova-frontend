@@ -32,8 +32,8 @@ export type BrandProps = {
 }
 
 export type SizeProps = {
+  code: string;
   label: string;
-  name: string;
 }
 
 export type ConditionProps = {

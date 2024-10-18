@@ -14,6 +14,15 @@ import { uploadImage } from './supabase';
 // import { calculateTotals } from './calculateTotals';
 // import { formatDate } from './format';
 
+const getAuthUser = async () => {
+  const user = await currentUser();
+  if (!user) {
+    throw new Error('You must be logged in to access this route');
+  }
+  if (!user.privateMetadata.hasProfile) redirect('/profile/create');
+  return user;
+};
+
 const renderError = (error: unknown): { message: string } => {
   console.log(error);
   return {
@@ -55,6 +64,7 @@ export const createProductAction = async (
     prevState: any,
     formData: FormData
   ): Promise<{ message: string }> => {
+    const user = await getAuthUser();
     try {
       const rawData = Object.fromEntries(formData);
       const file = formData.get('image') as File;
@@ -67,15 +77,14 @@ export const createProductAction = async (
       await db.product.create({
         data: {
           ...validatedFields,
-          brandId: 'cm2cy8i2f00010cmg5ri61yso',
           category: '',
           condition: '',
           gender: '',
           image: fullPath,
           size: '',
           origPrice: 4000,
-          profileId: 'user_2nVvtoFOmFm3w8sPtbYFePjl5ZI',
-          source: ''
+          profileId: user.id,
+          source: '',
         },
       });
     } catch (error) {
@@ -95,6 +104,19 @@ export const createProductAction = async (
       // }
     })
     return brands;
+  }
+
+  export const fetchBrandById = async ({ brandId } : { brandId: string }) => {
+    const brand = await db.brand.findUnique({
+      select: {
+        id: true,
+        name: true,
+      },
+      where: {
+        id: brandId
+      }
+    })
+    return brand;
   }
 
   export const fetchProducts = async () => {

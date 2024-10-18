@@ -10,15 +10,15 @@ async function CreateProfilePage() {
   if (user?.privateMetadata?.hasProfile) redirect('/');
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'> new user</h1>
+      <h1 className='text-2xl font-semibold mb-8 capitalize'>創建新會員</h1>
       <div className='border p-8 rounded-md '>
         <FormContainer action={createProfileAction}>
           <div className='grid md:grid-cols-2 gap-4 mt-4'>
-            <FormInput type='text' name='firstName' label='First Name' />
-            <FormInput type='text' name='lastName' label='Last Name' />
-            <FormInput type='text' name='username' label='Username' />
+            <FormInput type='text' name='firstName' label='名字' />
+            <FormInput type='text' name='lastName' label='姓氏' />
+            <FormInput type='text' name='username' label='會員帳號' />
           </div>
-          <SubmitButton text='Create Profile' className='mt-8' />
+          <SubmitButton text='建立新會員' className='mt-8' />
         </FormContainer>
       </div>
     </section>

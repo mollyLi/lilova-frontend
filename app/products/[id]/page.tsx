@@ -1,14 +1,24 @@
-import { fetchProductDetails } from '@/utils/actions';
+import Image from 'next/image';
+import { fetchProductDetails, fetchBrandById } from '@/utils/actions';
 import { redirect } from 'next/navigation';
 
 async function  ProductDetailsPage({ params } : { params: {id: string }}) {
     const product = await fetchProductDetails(params.id);
     if (!product) redirect('/');
+    const brand = await fetchBrandById({ brandId: product.brandId })
     return (
         <section>
-            <h2>image box</h2>
-            <p>{product.name}</p>
-            <p>品牌 {product.brandId}</p>
+            <div className='relative h-[230px] mb-2 overflow-hidden my-4'>
+            <Image
+                src={product.image}
+                fill
+                sizes='(max-width:768px) 100vw, 50vw'
+                alt={product.name}
+                className='rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-500'
+            />
+            </div>
+            <p className='text-xl font-bold'>{product.name}</p>
+            <p className='text-blue-600'>品牌 {brand?.name}</p>
             <p>尺寸 {product.size}</p>
             <p>衣況 {product.condition}</p>
             <p>說明 {product.description}</p>

@@ -32,13 +32,13 @@ export const imageSchema = z.object({
 });
 
 function validateFile() {
-  const maxUploadSize = 1024 * 1024;
+  const maxUploadSize = 1024 * 1024 * 7;
   const acceptedFilesTypes = ['image/'];
   return z
     .instanceof(File)
     .refine((file) => {
       return !file || file.size <= maxUploadSize;
-    }, 'File size must be less than 1 MB')
+    }, 'File size must be less than 7 MB')
     .refine((file) => {
       return (
         !file || acceptedFilesTypes.some((type) => file.type.startsWith(type))
@@ -55,6 +55,7 @@ export const productSchema = z.object({
     .max(100, {
       message: 'name must be less than 100 characters.',
     }),
+  brandId: z.string(),
   price: z.coerce.number().int().min(0, {
     message: 'price must be a positive number.',
   }),

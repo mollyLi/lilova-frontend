@@ -4,7 +4,7 @@ import { ProductCardProps } from '@/utils/types';
 import { formatCurrency } from '@/utils/format';
 
 function ProductCard({ product }: { product: ProductCardProps }) {
-  const { name, brand, image, price, size, id: productId } = product;
+  const { name, image, price, size, id: productId } = product;
   return (
     <article className='mb-2 rounded-lg bg-gray-50'>
       <Link href={`/products/${productId}`}>
@@ -19,7 +19,6 @@ function ProductCard({ product }: { product: ProductCardProps }) {
         </div>
         <div className='p-2'>
           <h3 className='text-sm'>{name}</h3>
-          <p className='text-gray-500 text-sm'>{brand}</p>
           <p className='text-sm'>尺寸: {size}</p>
           <p className='font-semibold'>{formatCurrency(price)}</p>
         </div>

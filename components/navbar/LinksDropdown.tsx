@@ -14,8 +14,8 @@ import { SignedOut, SignedIn, SignInButton } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 function LinksDropdown() {
   const { userId } = auth();
-  const { ADMIN_USER_ID, ADMIN_USER_ID2 } = process.env
-  const isAdminUser = userId === ADMIN_USER_ID || userId === ADMIN_USER_ID2;
+  const adminIds = process.env.ADMIN_USER_ID?.split(',');
+  const isAdminUser = userId ? adminIds?.includes(userId) : false;
 
   return (
     <DropdownMenu>

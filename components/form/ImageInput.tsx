@@ -13,7 +13,7 @@ function ImageInput() {
         name={name}
         type='file'
         required
-        accept='image/*'
+        accept='.heic,.heif,image/*'
         className='max-w-xs'
       />
     </div>

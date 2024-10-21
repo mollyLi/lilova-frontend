@@ -67,9 +67,7 @@ export const createProductAction = async (
     const user = await getAuthUser();
     try {
       const rawData = Object.fromEntries(formData);
-      const file = formData.get('image') as File;
-      console.log(rawData);
-  
+      const file = formData.get('image') as File;  
       const validatedFields = validateWithZodSchema(productSchema, rawData);
       const validatedFile = validateWithZodSchema(imageSchema, { image: file });
       const fullPath = await uploadImage(validatedFile.image);
@@ -95,9 +93,9 @@ export const createProductAction = async (
         id: true,
         name: true,
       },
-      // orderBy: {
-      //   name: 'asc'
-      // }
+      orderBy: {
+        name: 'asc'
+      }
     })
     return brands;
   }

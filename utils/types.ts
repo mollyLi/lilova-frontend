@@ -15,7 +15,8 @@ export type ProductCardProps = {
   condition: string;
   description: string;
   gender: string;
-  image: string;
+  image?: string;
+  images?: string[];
   name: string;
   price: number | null;
   size: string;

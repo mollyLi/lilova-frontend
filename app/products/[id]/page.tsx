@@ -12,13 +12,27 @@ async function  ProductDetailsPage({ params } : { params: {id: string }}) {
     return (
         <section>
             <div className='relative h-[230px] mb-2 overflow-hidden my-4'>
-            <Image
-                src={product.image}
-                fill
-                sizes='(max-width:768px) 100vw, 50vw'
-                alt={product.name}
-                className='rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-500'
-            />
+                <Image
+                    src={product.image || product.images[0]}
+                    fill
+                    sizes='(max-width:768px) 100vw, 50vw'
+                    alt={product.name}
+                    className='rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-500'
+                />
+            </div>
+            <div className='flex flex-wrap gap-2'>
+                {product.images?.map((image, index) => {
+                    return (
+                     <Image
+                        key={index}
+                        className="rounded-lg object-cover w-[100px] h-[100px]"
+                        src={image}
+                        alt={product.name}
+                        width={100}
+                        height={100}
+                      />
+                    );
+                })}
             </div>
             <p className='text-gray-800'>{product.name}</p>
             <div className='flex items-center gap-2'>

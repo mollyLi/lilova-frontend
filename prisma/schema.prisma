@@ -5,9 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  directUrl         = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -15,7 +15,7 @@ generator client {
 }
 
 model Brand {
-  id          String     @id @default(cuid())
+  id          String    @id @default(cuid())
   description String?
   logo        String?
   name        String
@@ -24,34 +24,35 @@ model Brand {
 }
 
 model Profile {
-  id           String     @id @default(uuid())
-  clerkId      String     @unique
+  id           String    @id @default(uuid())
+  clerkId      String    @unique
   firstName    String
   lastName     String
   username     String
   email        String
   profileImage String
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  products Product[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  products     Product[]
 }
 
 model Product {
-  id          String     @id @default(uuid())
-  brand       Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  id          String   @id @default(uuid())
+  brand       Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
   brandId     String
   category    String
   condition   String
-  createdAt   DateTime   @default(now())
+  createdAt   DateTime @default(now())
   description String
   gender      String
   image       String
+  images      String[]
   name        String
   origPrice   Int
   price       Int
-  profile     Profile    @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profile     Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
   profileId   String
   size        String
   source      String
-  updatedAt   DateTime   @updatedAt
+  updatedAt   DateTime @updatedAt
 }

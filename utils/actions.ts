@@ -11,8 +11,6 @@ import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
 // import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { uploadImage } from './supabase';
-// import { calculateTotals } from './calculateTotals';
-// import { formatDate } from './format';
 
 const getAuthUser = async () => {
   const user = await currentUser();
@@ -67,16 +65,35 @@ export const createProductAction = async (
     const user = await getAuthUser();
     try {
       const rawData = Object.fromEntries(formData);
-      const file = formData.get('image') as File;  
+      const imageFiles: File[] | FormDataEntryValue[] = formData.getAll('images');
+      // console.log('imageFiles',  imageFiles)
       const validatedFields = validateWithZodSchema(productSchema, rawData);
-      const validatedFile = validateWithZodSchema(imageSchema, { image: file });
-      const fullPath = await uploadImage(validatedFile.image);
+      const uploadImagesPaths: string[] = [];
+
+      const uploadAllImages = async () => {
+        const uploadPromises = imageFiles?.map(async file => {          
+          const validatedFile = validateWithZodSchema(imageSchema, { image: file });
+          const fullPath = await uploadImage(validatedFile.image);
+          
+          // console.log('fullPath', fullPath);
+          return fullPath;  // Return the path instead of directly pushing it
+        });
+
+        // Wait for all uploads to complete
+        const results = await Promise.all(uploadPromises);
+        
+        // Once all images are uploaded, push the results to `uploadImagesPaths`
+        uploadImagesPaths.push(...results);
+      };
+
+      await uploadAllImages();
 
       await db.product.create({
         data: {
           ...validatedFields,
           category: '',
-          image: fullPath,
+          image: uploadImagesPaths[0],
+          images: uploadImagesPaths,
           profileId: user.id,
           source: '',
         },

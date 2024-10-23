@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
+const MAX_FILES = 8;
+
 interface DragAndDropUploaderProps {
   onFilesUploaded: (files: File[]) => void; // Callback for parent component to get the uploaded files
 }
@@ -10,6 +12,11 @@ const DragAndDropUploader: React.FC<DragAndDropUploaderProps> = ({ onFilesUpload
 
   // Handle dropped files
   const onDrop = useCallback((acceptedFiles: File[]) => {
+    if (acceptedFiles.length > MAX_FILES) {
+      alert(`最多只能上傳 ${MAX_FILES} 張圖片。`);
+      return; // Exit if the limit is reached
+    }
+
     // Update state with the dropped files
     setPreviewFiles(acceptedFiles);
 

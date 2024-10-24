@@ -17,10 +17,12 @@ function FormContainer({
   children: React.ReactNode;
 }) {
   const [state, formAction] = useFormState(action, initialState);
+  console.log('state', state);
   const { toast } = useToast();
 
   useEffect(() => {
-    if (state.message) {
+    console.log('state useEffect', state);
+    if (state && state.message) {
       toast({ description: state.message });
     }
   }, [state]);

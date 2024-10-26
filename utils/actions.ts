@@ -68,6 +68,7 @@ export const createProductAction = async (
       const imageFiles: File[] | FormDataEntryValue[] = formData.getAll('images');
       // console.log('imageFiles',  imageFiles)
       const validatedFields = validateWithZodSchema(productSchema, rawData);
+      validatedFields.brandId = +validatedFields.brandId;
       const uploadImagesPaths: string[] = [];
 
       const uploadAllImages = async () => {

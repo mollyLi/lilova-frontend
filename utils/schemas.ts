@@ -56,7 +56,7 @@ export const productSchema = z.object({
     .max(100, {
       message: 'name must be less than 100 characters.',
     }),
-  brandId: z.number(),
+  brandId: z.string().or(z.number()),
   condition: z.string(),
   size: z.string(),
   gender: z.string(),

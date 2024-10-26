@@ -1,9 +1,16 @@
 import { CodeLabelProps } from '@/utils/types';
 
-export const sizes: CodeLabelProps[] = [
+export const sourceType = [
+    {
+        code: 'dealer',
+        label: '經銷商/選品店'
+    }
+]
+
+export const sources: CodeLabelProps[] = [
     {
         code: 'general',
-        label: '單一尺寸',
+        label: 'Little Poetry 小詩洋行',
     },
     {
         code: '0_3m',
@@ -80,6 +87,6 @@ export const sizes: CodeLabelProps[] = [
 ];
 
 export const findSizeByCode = (code: string) => {
-    return sizes.find((item) => item.code === code);
+    return sources.find((item) => item.code === code);
 };
   

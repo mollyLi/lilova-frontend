@@ -32,7 +32,7 @@ export type BrandProps = {
   website?: string;
 }
 
-export type SizeProps = {
+export type CodeLabelProps = {
   code: string;
   label: string;
 }

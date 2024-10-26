@@ -25,7 +25,7 @@ export type ProductCardProps = {
 };
 
 export type BrandProps = {
-  id: string;
+  id: number;
   description?: string;
   logo?: string;
   name: string;

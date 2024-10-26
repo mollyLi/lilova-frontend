@@ -28,7 +28,7 @@ function BrandsInput({ brands } : { brands: BrandProps[] }) {
         <SelectContent>
           {brands.map((item) => {
             return (
-              <SelectItem key={item.id} value={item.id}>
+              <SelectItem key={item.id} value={item.id.toString()}>
                 {item.name}
               </SelectItem>
             );

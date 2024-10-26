@@ -14,13 +14,32 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Store {
+  id   Int    @id @default(autoincrement())
+  name String
+  link String
+}
+
 model Brand {
-  id          String    @id @default(cuid())
+  id          Int       @id @default(autoincrement())
   description String?
   logo        String?
   name        String
   products    Product[]
   website     String?
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  name          String
+  SubCategories SubCategory[]
+}
+
+model SubCategory {
+  id         Int      @id @default(autoincrement())
+  name       String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
 }
 
 model Profile {
@@ -37,22 +56,23 @@ model Profile {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  brand       Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  brandId     String
-  category    String
-  condition   String
-  createdAt   DateTime @default(now())
-  description String
-  gender      String
-  image       String
-  images      String[]
-  name        String
-  origPrice   Int
-  price       Int
-  profile     Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
-  profileId   String
-  size        String
-  source      String
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(uuid())
+  brand         Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brandId       Int
+  category      String
+  condition     String
+  createdAt     DateTime @default(now())
+  description   String
+  gender        String
+  image         String
+  images        String[]
+  name          String
+  origPrice     Int
+  purchasePrice Int?
+  price         Int
+  profile       Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId     String
+  size          String
+  source        String
+  updatedAt     DateTime @updatedAt
 }
